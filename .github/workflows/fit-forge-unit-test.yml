@@ -15,11 +15,8 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: ~/.pnpm-store
-          key:
-            # prettier-ignore
-            ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-pnpm-
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v2.4.0
         with:
@@ -32,15 +29,9 @@ jobs:
       - name: Test
         run: pnpm run test:ci
         working-directory: ./apps/fit-forge
-      - name: Vercel Pull
-        # prettier-ignore
-        run: npx vercel pull --token ${{ secrets.ACTIONS_DEPLOY_TO_VERCEL }} --scope ${{ secrets.VERCEL_SCOPE }} --yes
-      - name: Vercel Build
-        run: npx vercel build
       - name: Deploy to Vercel
         if: ${{ success() }}
-        run: |
-          npx vercel --token ${{ secrets.ACTIONS_DEPLOY_TO_VERCEL }} --prebuilt --scope ${{ secrets.VERCEL_SCOPE }} --yes
+        run: npx vercel deploy --prod --token ${{ secrets.ACTIONS_DEPLOY_TO_VERCEL }} --scope ${{ secrets.VERCEL_SCOPE }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_FIT_FORGE }}
