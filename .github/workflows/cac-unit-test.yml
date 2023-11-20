@@ -34,13 +34,13 @@ jobs:
         working-directory: ./apps/cac
       - name: Vercel Pull
         # prettier-ignore
-        run: npx vercel pull --token ${{ secrets.ACTIONS_DEPLOY_TO_VERCEL }} --yes
+        run: npx vercel pull --token ${{ secrets.ACTIONS_DEPLOY_TO_VERCEL }} --scope ${{ secrets.VERCEL_SCOPE }} --yes
       - name: Vercel Build
         run: npx vercel build
       - name: Deploy to Vercel
         if: ${{ success() }}
         run: |
-          npx vercel --token ${{ secrets.ACTIONS_DEPLOY_TO_VERCEL }} --prebuilt --yes
+          npx vercel --token ${{ secrets.ACTIONS_DEPLOY_TO_VERCEL }} --scope ${{ secrets.VERCEL_SCOPE }} --prebuilt --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_CAC }}
