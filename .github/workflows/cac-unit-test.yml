@@ -1,4 +1,4 @@
-name: 'Tests: Unit cac'
+name: "Tests: Unit cac"
 on:
   push:
     branches: [main]
@@ -15,8 +15,11 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-pnpm-
+          key:
+            # prettier-ignore
+            ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v2.4.0
         with:
@@ -24,4 +27,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18.x
-      - name: Install depe
+      - name: Install dependencies
+        run: pnpm install
+      - name: Test
+        run: pnpm run test:ci
+        working-directory: ./apps/cac
+      - name: Vercel Pull
+        # prettier-ignore
+        run: npx vercel pull --token ${{ secrets.ACTIONS_DEPLOY_TO_VERCEL }} --yes
+      - name: Vercel Build
+        run: npx vercel build
+      - name: Deploy to Vercel
+        if: ${{ success() }}
+        run: |
+          npx vercel --token ${{ secrets.ACTIONS_DEPLOY_TO_VERCEL }} --prebuilt --yes
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_CAC }}
