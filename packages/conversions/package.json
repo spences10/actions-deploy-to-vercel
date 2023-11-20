@@ -1,0 +1,10 @@
+{
+  "name": "@actions-deploy-to-vercel/conversions",
+  "version": "0.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "vitest": "^0.34.0"
+  }
+}
