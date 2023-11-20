@@ -31,6 +31,7 @@ jobs:
         run: pnpm install
       - name: Test
         run: pnpm run test:ci
+        working-directory: ./apps/fit-forge
       - name: Vercel Pull
         # prettier-ignore
         run: npx vercel pull --token ${{ secrets.FIT_FORGE_GITHUB_ACTIONS }} --yes
