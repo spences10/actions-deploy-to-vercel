@@ -34,13 +34,13 @@ jobs:
         working-directory: ./apps/fit-forge
       - name: Vercel Pull
         # prettier-ignore
-        run: npx vercel pull --token ${{ secrets.FIT_FORGE_GITHUB_ACTIONS }} --yes
+        run: npx vercel pull --token ${{ secrets.ACTIONS_DEPLOY_TO_VERCEL }} --yes
       - name: Vercel Build
         run: npx vercel build
       - name: Deploy to Vercel
         if: ${{ success() }}
         run: |
-          npx vercel --token ${{ secrets.FIT_FORGE_GITHUB_ACTIONS }} --prebuilt --yes
+          npx vercel --token ${{ secrets.ACTIONS_DEPLOY_TO_VERCEL }} --prebuilt --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_FIT_FORGE }}
