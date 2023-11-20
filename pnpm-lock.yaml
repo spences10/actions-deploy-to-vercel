@@ -35,6 +35,9 @@ importers:
 
   apps/cac:
     devDependencies:
+      '@actions-deploy-to-vercel/conversions':
+        specifier: workspace:*
+        version: link:../../packages/conversions
       '@playwright/test':
         specifier: ^1.28.1
         version: 1.40.0
@@ -107,6 +110,9 @@ importers:
 
   apps/fit-forge:
     devDependencies:
+      '@actions-deploy-to-vercel/conversions':
+        specifier: workspace:*
+        version: link:../../packages/conversions
       '@playwright/test':
         specifier: ^1.28.1
         version: 1.40.0

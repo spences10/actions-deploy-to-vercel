@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { conversions } from '$lib'
 	import Input from '$lib/components/input.svelte'
 	import Select from '$lib/components/select.svelte'
-	import { conversions } from '$lib/conversions/config'
 
 	interface Conversion {
 		name: string

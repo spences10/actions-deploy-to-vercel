@@ -1,5 +1,5 @@
 interface LengthUnits {
-	[key: string]: number
+	[key: string]: number;
 }
 
 export const length_units: LengthUnits = {
@@ -11,7 +11,7 @@ export const length_units: LengthUnits = {
 	ft: 0.3048,
 	yd: 0.9144,
 	mi: 1609.34,
-}
+};
 
 export function convert_length(
 	from_unit: string,
@@ -22,12 +22,12 @@ export function convert_length(
 		!length_units.hasOwnProperty(from_unit) ||
 		!length_units.hasOwnProperty(to_unit)
 	) {
-		return null // Invalid unit
+		return null; // Invalid unit
 	}
 
 	// Convert to meters first, then to the desired unit
-	const value_in_meters = value * length_units[from_unit]
-	const converted_value = value_in_meters / length_units[to_unit]
+	const value_in_meters = value * length_units[from_unit];
+	const converted_value = value_in_meters / length_units[to_unit];
 
-	return converted_value
+	return converted_value;
 }

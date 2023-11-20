@@ -1,6 +1,6 @@
 {
 	"name": "cac",
-	"version": "0.0.1",
+	"version": "0.0.0",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
@@ -14,6 +14,7 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"devDependencies": {
+		"@actions-deploy-to-vercel/conversions": "workspace:*",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.5.0",
